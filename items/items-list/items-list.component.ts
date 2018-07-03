@@ -4,10 +4,6 @@ import { Component} from '@angular/core';
 import { Item } from '../shared/item';
 
 
-
-
-
-
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.component.html',

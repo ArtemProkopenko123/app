@@ -1,38 +1,66 @@
 
 
 
-<div *ngIf="user">
+<div *ngIf="user" class="col-md-8">
 
     <form (ngSubmit)="onSubmit()">
         <div class="form-group row">
-          <label for="item" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input type="text" #input
+          <label for="item" class="col-sm-4 col-form-label">Email</label>
+          <div class="col-sm-8">
+            <input type="text" 
               readonly 
               id="item"
-              name="item"
+              name="Email"
               class="form-control-plaintext"
               [value]="user.email"
             >
           </div>
-          <label for="item" class="col-sm-2 col-form-label">Email Verified</label>
-          <div class="col-sm-10">
-            <input type="text" #input
+          <label for="item" class="col-sm-4 col-form-label">Email Verified</label>
+          <div class="col-sm-8">
+            <input type="text"
               readonly 
               id="item"
-              name="item"
+              name="emailVerified"
               class="form-control-plaintext"
-              [value]="user.emailVerified"
+              [(value)]="user.emailVerified"
             >
           </div>
-          <label for="item" class="col-sm-2 col-form-label">Email Verified</label>
-          <div class="col-sm-10">
-            <input type="text" #input
-              [(ngModel)]="userData.First_Name" 
-              id="item"
-              name="item"
+          <label for="First_Name" class="col-sm-4 col-form-label">First Name</label>
+          <div class="col-sm-8">
+            <input type="text" 
+              [(ngModel)]="userData.First_Name"
+              id="First_Name"
+              name="First_Name"
               class="form-control"
-
+            >
+          </div>
+          <label for="Last_Name" class="col-sm-4 col-form-label">Last Name</label>
+          <div class="col-sm-8">
+            <input type="text" 
+              [(ngModel)]="userData.Last_Name" 
+              id="Last_Name"
+              name="Last_Name"
+              class="form-control"
+            >
+          </div>
+          <label for="phone" class="col-sm-4 col-form-label">Phone</label>
+          <div class="col-sm-8">
+            <input type="text" 
+              (keypress)="keyPress($event)"
+              [(ngModel)]="userData.Phone" 
+              id="phone"
+              name="Phone"
+              class="form-control"
+              [value]="Doe"
+            >
+          </div>
+          <label for="Contact_Address" class="col-sm-4 col-form-label">Contact Address</label>
+          <div class="col-sm-8">
+            <input type="text" 
+              [(ngModel)]="userData.Contact_Address" 
+              id="Contact_Address"
+              name="Contact_Address"
+              class="form-control"
             >
           </div>
         </div>

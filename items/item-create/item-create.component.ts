@@ -2,7 +2,6 @@ import { AuthService } from './../../users/shared/auth.service';
 import { Component } from '@angular/core';
 import { ItemService } from '../shared/item.service';
 
-import {Routes, RouterModule, Router} from "@angular/router";
 
 @Component({
   selector: 'app-item-create',

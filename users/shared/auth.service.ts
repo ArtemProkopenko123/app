@@ -13,14 +13,13 @@ export class AuthService {
     this.user = this.afAuth.authState;
   }
 
-
-
   signup(email: string, password: string) {
     this.afAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Success!', value);
+        console.log('Success!', value); 
+        value.user.sendEmailVerification()
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -32,7 +31,9 @@ export class AuthService {
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => { this.user =  this.afAuth.user;
+        
         return true;
+        
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);

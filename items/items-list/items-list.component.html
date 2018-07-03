@@ -5,13 +5,17 @@
 		<h2  *ngIf="items?.length > 0">Content from Firebase </h2>
 		<div class="col-md-3">
 			<ul>
-				<li *ngFor="let item of items ; index as i"  > {{i}}
-					{{item.text}} 
-					<br> 
-					{{item.timestamp * -1  | date:'medium' }} 
-					<br>
-					<a class="nav-link" [routerLink]="['/item/detail']" [queryParams]="{item: item.key}" >Detail</a>	
-					<button (click)="onDelete(item)" [attr.data-index]="item.key" class="btn btn-success">Delete</button>
+				<li *ngFor="let item of items ; index as i"  >
+					<a class="nav-link" [routerLink]="['/item/detail']" [queryParams]="{item: item.key}" >
+						<div> 
+							{{i}}
+							{{item.text}} 
+							<br> 
+							{{item.timestamp * -1  | date:'medium' }} 
+							<br>
+							<button (click)="onDelete(item)" [attr.data-index]="item.key" class="btn btn-success  btn-block">Delete</button>
+						</div>
+					</a>
 				</li>
 			</ul>
 		</div>
