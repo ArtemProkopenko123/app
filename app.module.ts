@@ -5,11 +5,15 @@ import { AppComponent } from './app.component';
 import { ItemModule } from './items/item.module';
 import { UserModule } from './users/user.module';
 import { AppRouterModule } from './app-routing.module';
+import { TopMenuComponent } from './menu/top-menu/top-menu.component';
+import { AuthService } from './users/shared/auth.service';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    TopMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,7 @@ import { AppRouterModule } from './app-routing.module';
     ItemModule,
     UserModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

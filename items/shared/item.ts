@@ -1,6 +1,8 @@
 export interface Item {
-    key: string;
-    content: string;
-    timestamp: number
-    createdB?: number;
+    key: any,
+    text: string,
+    timestamp: number,
+    createdBy: string,
+    active: boolean,
+
   }

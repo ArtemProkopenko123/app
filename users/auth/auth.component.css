@@ -1,0 +1,9 @@
+li.active {
+    border-bottom: 1px solid green;
+}
+li.list-inline-item{
+    cursor: pointer;
+}
+.error {
+    border: 1px solid #f00;
+}

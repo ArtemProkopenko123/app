@@ -1,20 +1,24 @@
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { ItemDetailComponent } from './items/item-detail/item-detail.component';
 import { AuthComponent } from './users/auth/auth.component';
-import { AppComponent } from './app.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ItemsListComponent } from './items/items-list/items-list.component';
+import { ItemCreateComponent } from './items/item-create/item-create.component';
 
 
 const routes: Routes = [
     { path: '',  redirectTo: '/home', pathMatch: 'full'},
-    { path: 'home', component: ItemsListComponent},
-    { path: 'user', component: AuthComponent},
-    { path: '**', redirectTo: '/home' }
+    { path: 'home', component: ItemCreateComponent},
+    { path: 'login', component: AuthComponent},
+    { path: 'item/detail', component: ItemDetailComponent},
+    { path: 'profile', component: UserProfileComponent},
+
+    //{ path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { useHash: false })],
     exports: [RouterModule]
 }) 
 

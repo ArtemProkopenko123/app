@@ -11,18 +11,24 @@ import { environment} from '../../environments/environment';
 
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/auth.service';
-
-
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
-    AuthComponent
+    AuthComponent,
+    UserProfileComponent
   ],
 
   imports: [
     CommonModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxCaptchaModule.forRoot({
+      reCaptcha2SiteKey: '6LfvrWEUAAAAACgxPFDdJdxvYNNEokznSMdC6k2I'
+    })
+
+    
   ],
 
   providers: [AuthService],

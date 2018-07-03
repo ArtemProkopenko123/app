@@ -1,3 +1,27 @@
-<p>
-  item-create works!
-</p>
+
+
+<div class="container-fluid" *ngIf="authSvc.user">
+  <h4 *ngIf="success">SUCCESS</h4>
+
+	<div style="width: 300px;">
+		<form (ngSubmit)="onSubmit()">
+			<div class="form-group">
+        <label for="item">Item</label>
+        <input type="text" #input
+          required 
+          id="item"
+          name="item"
+          class="form-control" 
+          [(ngModel)]="itemValue" 
+          placeholder="Enter content..."
+          minlength="10"
+          >
+			</div>
+			<div class="btn-group">
+				<button type="submit" class="btn btn-success" [disabled]="!itemValue">Submit</button>
+			</div>
+		</form>
+  </div>
+</div>
+
+<app-items-list></app-items-list>

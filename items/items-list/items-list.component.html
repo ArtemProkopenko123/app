@@ -1,27 +1,16 @@
-<div class="container-fluid">
 
- 
-	<div style="width: 300px;">
-		<form (ngSubmit)="onSubmit()">
-			<div class="form-group">
-				<label for="item">Item</label> <input type="text"
-					class="form-control" placeholder="Enter content..." id="item"
-					required [(ngModel)]="itemValue" name="item">
-			</div>
-			<div class="btn-group">
-				<button type="submit" class="btn btn-success">Submit</button>
-			</div>
-		</form>
-	</div>
-	<section > 
-		<h2  *ngIf="(items | async)?.length > 0">Content from Firebase </h2>
+
+<div class="container-fluid" *ngIf="authSvc.user ">
+	<section>
+		<h2  *ngIf="items?.length > 0">Content from Firebase </h2>
 		<div class="col-md-3">
 			<ul>
-				<li *ngFor="let item of items | async; index as i"  > {{i}}
-					{{item.content}} 
+				<li *ngFor="let item of items ; index as i"  > {{i}}
+					{{item.text}} 
 					<br> 
 					{{item.timestamp * -1  | date:'medium' }} 
-					<br> 	
+					<br>
+					<a class="nav-link" [routerLink]="['/item/detail']" [queryParams]="{item: item.key}" >Detail</a>	
 					<button (click)="onDelete(item)" [attr.data-index]="item.key" class="btn btn-success">Delete</button>
 				</li>
 			</ul>

@@ -1,39 +1,49 @@
+import { AuthService } from './../../users/shared/auth.service';
 import { Item } from './item';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class ItemService  {
+  private itemsURL = '/items';
+  items: AngularFireList<any>;
 
-  private heroesUrl = '/items'
-
-  constructor(public db: AngularFireDatabase) {}
-
-  getItems(param:string): Observable<Item[]>{
-    return this.db.list<Item>(this.heroesUrl, ref => ref.orderByChild('timestamp')).valueChanges();
+  constructor(private db: AngularFireDatabase, private authSvc: AuthService  ) {
+    this.items = db.list(this.itemsURL);
   }
 
-  onSubmit(value:string) {
-    if(value) {
-      this.db.list<Item>(this.heroesUrl).push({ 
-        
-        content: value, 
-        timestamp: Date.now() * -1, 
-        key: ''
+  // READ   
+  getItem(param: string): AngularFireObject<Item>{
+     //return this.db.object(this.itemsURL, ref => ref.);
+     return this.db.object('/items/'+param)
+    }
 
-      }).then((item) => { this.toggleDone(item); });
-    } else { }
+  //WRITE
+  onSubmit(value: string) {
+   return this.items.push({ 
+      //KEYS
+      text: value, 
+      timestamp: Date.now() * -1, 
+      key: '',
+      createdBy: '',
+      active: true,
+
+    }).then(item => {this.items.update( item.key, { key: item.key }); return true});
   }
 
-  toggleDone(item: Item) {
-    this.db.object(this.heroesUrl+'/' + item.key).update({ key: item.key });
-  }
-
+  // DELETE
   onDelete(item){
-    this.db.list(this.heroesUrl+"/"+ Object(item).getAttribute('data-index')).remove();
+    const promise = this.db.list(this.itemsURL+"/"+ Object(item).getAttribute('data-index')).remove();
+    promise
+    .then(_ => console.log('success'))
+    .catch(err => this.handleError(err));
   }
 
-
+  private handleError(error) {
+    console.log(error);
+  }
 }
