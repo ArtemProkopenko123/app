@@ -1,3 +1,4 @@
+import { UkrCitysService } from './../sys-services/ukr-citys.service';
 
 
 
@@ -13,6 +14,8 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/auth.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AuthComponent,
@@ -26,12 +29,12 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AngularFireAuthModule,
     NgxCaptchaModule.forRoot({
       reCaptcha2SiteKey: '6LfvrWEUAAAAACgxPFDdJdxvYNNEokznSMdC6k2I'
-    })
-
+    }),
+    HttpClientModule
     
   ],
 
-  providers: [AuthService],
+  providers: [AuthService, UkrCitysService],
 
   exports : [
     AuthComponent

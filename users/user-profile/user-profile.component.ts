@@ -10,6 +10,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { UkrCitysService } from '../../sys-services/ukr-citys.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -19,23 +21,24 @@ import {
 export class UserProfileComponent implements OnInit {
   private  user: firebase.User;
   userData = new UserData();
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private citySvc: UkrCitysService) {
 
   }
 
   ngOnInit() {
-    this.authService.user.subscribe(val => {this.user = val; console.log(val)});
+    this.authService.user.subscribe(val => {this.user = val; this.userData.UserID = val.uid;});
   }
 
   onSubmit(UserData){
+    this.userData.UserID = this.user.uid;
     console.log(this.userData)
   }
   keyPress(event: any) {
     const pattern = /[0-9\+\-\ ]/;
-
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
     }
   }
+
 }
