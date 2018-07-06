@@ -1,8 +1,8 @@
 
 
 
-<div *ngIf="user" class="col-md-8">
-  <form (ngSubmit)="onSubmit()">
+<div *ngIf="user && userData && userId" class="col-md-8" >
+  <form [formGroup]="formData" (submit)="onSubmit()">
     <h3>Main Info</h3>
     <div class="form-group row">
       
@@ -29,18 +29,19 @@
       <label for="First_Name" class="col-sm-4 col-form-label">First Name</label>
       <div class="col-sm-8">
         <input type="text" 
-          [(ngModel)]="userData.First_Name"
+          formControlName="First_Name"
           id="First_Name"
-          name="First_Name"
           class="form-control"
         >
+        <div class="error" *ngIf="isControlInvalid('First_Name')">
+          Имя должно состоять только из русских букв
+        </div>
       </div>
       <label for="Last_Name" class="col-sm-4 col-form-label">Last Name</label>
       <div class="col-sm-8">
         <input type="text" 
-          [(ngModel)]="userData.Last_Name" 
+          formControlName="Last_Name"
           id="Last_Name"
-          name="Last_Name"
           class="form-control"
         >
       </div>
@@ -48,11 +49,9 @@
       <div class="col-sm-8">
         <input type="text" 
           (keypress)="keyPress($event)"
-          [(ngModel)]="userData.Phone" 
+          formControlName="Phone" 
           id="phone"
-          name="Phone"
           class="form-control"
-          [value]="Doe"
         >
       </div>
 
@@ -62,7 +61,7 @@
     <div class="form-group row">
       <label for="city" class="col-sm-4 col-form-label">City</label>
       <div class="col-sm-8">
-        <select class=" form-control" [(ngModel)]="userData.City" name="city" id="select">
+        <select class=" form-control" formControlName="City" id="select">
           <option selected disabled>Select</option>
           <option *ngFor="let city of citySvc.citys " [ngValue]="city.value">
             {{city.name}}
@@ -73,15 +72,14 @@
       <label for="Contact_Address" class="col-sm-4 col-form-label">Contact Address</label>
       <div class="col-sm-8">
         <input type="text" 
-          [(ngModel)]="userData.Contact_Address" 
+          formControlName="Contact_Address"
           id="Contact_Address"
-          name="Contact_Address"
           class="form-control"
         >
       </div>
     </div>
     <div class="btn-group">
-      <button type="submit" class="btn btn-success" >Submit</button>
+      <button type="submit" class="btn btn-success " >Update</button>
     </div>
   </form>
 </div>

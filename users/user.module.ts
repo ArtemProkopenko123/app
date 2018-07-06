@@ -15,7 +15,7 @@ import { AuthService } from './shared/auth.service';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AuthComponent,
@@ -30,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     NgxCaptchaModule.forRoot({
       reCaptcha2SiteKey: '6LfvrWEUAAAAACgxPFDdJdxvYNNEokznSMdC6k2I'
     }),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
     
   ],
 

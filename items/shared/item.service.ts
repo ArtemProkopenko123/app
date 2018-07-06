@@ -18,9 +18,8 @@ export class ItemService  {
 
   // READ   
   getItem(param: string): AngularFireObject<Item>{
-     //return this.db.object(this.itemsURL, ref => ref.);
-     return this.db.object('/items/'+param)
-    }
+    return this.db.object('/items/'+param)
+  }
 
   //WRITE
   onSubmit(value: string) {
