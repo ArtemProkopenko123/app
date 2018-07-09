@@ -13,20 +13,26 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class UserProfileComponent implements OnInit {
   private userData: UserData ;
   private formData: FormGroup;
-  private user: firebase.User = null;
+  private user: firebase.UserInfo = null;
   private userId: string = null;
-  constructor(public authService: AuthService, private citySvc: UkrCitysService, private crudDB: CrudDBService,private fb: FormBuilder) {
+  constructor(public authSvc: AuthService, 
+              private citySvc: UkrCitysService, 
+              private crudDB: CrudDBService,
+              private fb: FormBuilder) {
 
-  }
+              }
 
   ngOnInit() {
-    this.authService.user.subscribe(authVal => {
-      if(authVal){console.log("ENTER");
+    this.authSvc.currentUserObservable().subscribe(authVal => {
+      if(authVal){
         this.user = authVal;
         this.userId = authVal.uid;
         this.crudDB.getUserData(authVal.uid)
         .valueChanges().
-         subscribe(val  => {this.userData = val;this.initForm();});
+         subscribe(val  => {
+          this.userData = val;
+          this.initForm();
+        });
       } else  { window.location.replace('/login'); }
     });
 

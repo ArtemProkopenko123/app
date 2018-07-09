@@ -1,24 +1,27 @@
 
 import { Injectable} from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Observable } from 'rxjs';
 import { CrudDBService } from '../../sys-services/crud-db.service';
 import { UserData } from './user-data';
 
 @Injectable()
 export class AuthService {
   
-  public user/*:  Observable<firebase.User>*/ = null;
+  authState: any = null;
 
   constructor(private afAuth: AngularFireAuth, private crudDB: CrudDBService) {
-    this.user = this.afAuth.auth.currentUser;
+    this.afAuth.authState.subscribe((auth) => {
+      this.authState = auth
+    });
   }
 
-  signup(email: string, password: string) {
-    this.afAuth
-      .auth
-      .createUserWithEmailAndPassword(email, password)
+  currentUserObservable(): any {
+    return this.afAuth.authState
+  }
+  emailSignup(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(value => {
+        this.authState = value
         console.log('Success!', value); 
         value.user.sendEmailVerification()
       })
@@ -27,12 +30,10 @@ export class AuthService {
       });    
   }
 
-  login(email: string, password: string) {
-    this.afAuth
-      .auth
-      .signInWithEmailAndPassword(email, password)
-      .then(value => { 
-        this.user =  this.afAuth.user;
+  emailLogin(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((value) => { 
+        this.authState = value;
         this.crudDB.getUserData(value.user.uid).valueChanges().subscribe(data=> {
           if(!data){
             this.crudDB.initializeUser(value.user.uid, '/user' );
@@ -42,7 +43,6 @@ export class AuthService {
             this.crudDB.updateData(value.user.uid, userData2 , '/user');
           }
         });
-        return true;
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -50,10 +50,7 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth
-      .auth
-      .signOut();
-      console.log(this.user);
+    this.afAuth.auth.signOut();
   }
 
 }

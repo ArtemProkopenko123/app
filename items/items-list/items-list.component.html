@@ -1,12 +1,12 @@
 
 
-<div class="container-fluid" *ngIf="authSvc.user ">
+<div class="container-fluid" *ngIf="authSvc.authState ">
 	<section>
 		<h2  *ngIf="items?.length > 0">Content from Firebase </h2>
 		<div class="col-md-3">
 			<ul>
 				<li *ngFor="let item of items ; index as i"  >
-					<a class="nav-link" [routerLink]="['/item/detail']" [queryParams]="{item: item.key}" >
+					<a class="nav-link" [routerLink]="['/my-posts/detail']" [queryParams]="{item: item.key}" >
 						<div> 
 							{{i}}
 							{{item.text}} 

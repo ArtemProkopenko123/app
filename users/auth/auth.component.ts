@@ -20,12 +20,12 @@ export class AuthComponent implements OnInit {
   }
 
   signup() {
-    this.authService.signup(this.email, this.password);
+    this.authService.emailSignup(this.email, this.password);
     this.email = this.password = '';
   }
 
   login() {
-    this.authService.login(this.email, this.password);
+    this.authService.emailLogin(this.email, this.password);
      this.email = this.password = '';    
   }
 

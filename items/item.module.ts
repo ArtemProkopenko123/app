@@ -27,6 +27,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // for database
+
+    
   ],
 
   providers: [ItemService],
