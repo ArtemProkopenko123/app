@@ -1,10 +1,10 @@
 
 <div *ngIf="user">{{user.uid}}</div>
 
-<div class="col-md-4 offset-md-4  col-sm-6">
+<div class="col-md-4 offset-md-4  col-sm-8">
 
   <ul class="list-inline" *ngIf="!(authService.user )">
-    <li class="list-inline-item " (click)="toggleTab(true)"  [ngClass]="{'active':area === true}"><h4>Login</h4> </li>
+    <li class="list-inline-item" (click)="toggleTab(true)"  [ngClass]="{'active':area === true}"><h4>Login</h4> </li>
     <li class="list-inline-item float-right" (click)="toggleTab(false)" [ngClass]="{'active':area !== true}" ><h4>Registration</h4> </li>
   </ul>
 

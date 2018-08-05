@@ -4,5 +4,4 @@ export interface Item {
     timestamp: number,
     createdBy: string,
     active: boolean,
-
   }

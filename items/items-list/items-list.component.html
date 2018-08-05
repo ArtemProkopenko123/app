@@ -13,9 +13,10 @@
 							<br> 
 							{{item.timestamp * -1  | date:'medium' }} 
 							<br>
-							<button (click)="onDelete(item)" [attr.data-index]="item.key" class="btn btn-success  btn-block">Delete</button>
+							
 						</div>
 					</a>
+					<button (click)="onDelete(item)" [attr.data-index]="item.key" class="btn btn-success  btn-block">Delete</button>
 				</li>
 			</ul>
 		</div>

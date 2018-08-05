@@ -13,6 +13,9 @@ export class ItemsListComponent {
   private items: Item[] = null;
   constructor(private itmSvc: ItemService, private authSvc: AuthService) { 
     itmSvc.items.valueChanges().subscribe(val => this.items = val);
+    this.authSvc.currentUserObservable().subscribe(authVal => {
+      if(!authVal)  { window.location.replace('/login'); }
+    });
   }
 
   onDelete(){

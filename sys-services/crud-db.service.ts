@@ -34,4 +34,12 @@ export class CrudDBService {
   getUserData(userKey: string) : AngularFireObject<UserData>{
     return this.db.object(`/user/${userKey}`);
   }
+
+  // SUBMIT
+  submitData(userID, data, url: string){
+    return this.db.list('/'+url+'/' ).push(data).then(key => {
+      data.itemKey = key.key; 
+      this.db.object('/'+url+'/'+ key.key).update(data);
+    });
+  }
 }

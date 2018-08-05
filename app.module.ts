@@ -6,6 +6,7 @@ import { ItemModule } from './items/item.module';
 import { UserModule } from './users/user.module';
 import { AppRouterModule } from './app-routing.module';
 import { TopMenuComponent } from './menu/top-menu/top-menu.component';
+import { AngularFireStorageModule } from '../../node_modules/angularfire2/storage';
 
 
 
@@ -20,6 +21,7 @@ import { TopMenuComponent } from './menu/top-menu/top-menu.component';
     AppRouterModule,
     ItemModule,
     UserModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

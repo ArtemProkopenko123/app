@@ -1,3 +1,31 @@
 input.ng-touched.ng-invalid{
     border-color: red;
    }
+   img.img-with-border{
+    border: 2px solid lightblue;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+   }
+label{
+    text-align: right !important; 
+}
+
+label.col-2.col-form-label {
+    text-align: right;
+    justify-content: right;
+    display: inline-block;
+}
+.required{
+    color: red;
+}
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+}
+.ng-valid.ng-dirty{
+    border-left: 5px solid #42A948; /* green */
+}
+input.ng-dirty:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }

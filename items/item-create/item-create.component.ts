@@ -1,7 +1,10 @@
+import { AuthService } from './../../users/shared/auth.service';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { UkrCitysService } from '../../sys-services/ukr-citys.service';
 import { NgForm } from '@angular/forms';
+import { CrudDBService } from '../../sys-services/crud-db.service';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 
 
@@ -12,20 +15,58 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./item-create.component.css']
 })
 export class ItemCreateComponent implements OnInit  {
+  private submited: boolean = false;
+  error: string = null;
+  private userKey:string;
+  files: Object[] = [];
+  constructor(private citySvc: UkrCitysService, 
+              private crud: CrudDBService,
+              private authSvc: AuthService,
+              private storage: AngularFireStorage) {
 
-  fieldValue;
+    this.authSvc.currentUserObservable().subscribe(authVal => {
+      if(!authVal) window.location.replace('/login'); 
+      else this.userKey = authVal.uid;
+    });
 
-  constructor(private citySvc: UkrCitysService) {}
+  }
+  getFiles(event){ 
+    this.files.push( event.target.files); 
+
+    
+} 
+
+
   ngOnInit(){
-
+    
   }
 
-  setValue(event){
-    console.log(event.target.getAttribute("div-value"));
-   
-  }
 
+
+
+    /** Phone field pattern */ 
+    keyPress(event: any) {
+      const pattern = /[0-9\+\-\ ]/;
+      let inputChar = String.fromCharCode(event.charCode);
+      if (event.keyCode != 8 && !pattern.test(inputChar)) {
+        event.preventDefault();
+      }
+    }
+
+    
   onSubmit(form: NgForm){
-    console.log(form.value);
+
+    //this.crud.submitData(form.controls)
+    form.value.userKey = this.userKey;
+    form.value.DateSubmit = Date.now();
+
+    this.crud.submitData(this.userKey, form.value, 'item2');
+
+    /* FILE UPLOADER
+    this.files.forEach(data => {
+      this.storage.upload("items/"+ this.userKey + "/" + data["0"].name ,data["0"] );
+    });
+    */
   }
+    
 }
